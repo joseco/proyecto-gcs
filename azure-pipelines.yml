@@ -20,6 +20,9 @@ steps:
     sudo apt-get -y install openjdk-8-jdk
     sudo apt-get -y install sbt
     sudo apt-get -y install rpm
+    mkdir -p ~/.ssh
+    (echo $WEBSERVERSSHKEY | base64 --decode)  > ~/.ssh/id_azure.pem
+    chmod -R go= ~/.ssh
   displayName: 'Provisioning enviroment'
 
 - script: |
@@ -37,5 +40,5 @@ steps:
 
 - script: |
     echo $USERWEBSERVER@$IPWEBSERVER
-    scp -i ./id_azure.pem /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@157.55.199.18:/home/azureuser
+    scp -i ~/.ssh/id_azure.pem /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@157.55.199.18:/home/azureuser
   displayName: 'Deploying'
