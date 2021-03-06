@@ -9,9 +9,11 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: centos:7
 
 steps:
+- script: ls
+  displayName: 'Listing directory'
+
 - script: echo Compilar y correr las pruebas unitarias
   displayName: 'Commit Check'
 
