@@ -54,5 +54,5 @@ steps:
     sleep 5
     sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart gcs-app"
     sleep 5
-    sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo setsebool -P httpd_can_network on"
+    sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo setsebool -P httpd_can_network_connect on"
   displayName: 'Deploying'
