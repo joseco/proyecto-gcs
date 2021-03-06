@@ -19,10 +19,7 @@ steps:
     sudo apt-get -y update
     sudo apt-get -y install openjdk-8-jdk
     sudo apt-get -y install sbt
-    sudo apt-get install -y git
-    sudo apt-get install -y which
-    sudo apt-get install -y yum-utils
-    sudo apt-get -y install rpm-build
+    sudo apt-get -y install rpm
   displayName: 'Installing dependencies'
 
 - script: |
