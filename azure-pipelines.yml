@@ -13,12 +13,16 @@ pool:
 steps:
 - script: |
     echo ---------------> Update
+    echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+    curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
     sudo add-apt-repository ppa:openjdk-r/ppa
     sudo apt-get -y update
-    echo ---------------> Installing Java
     sudo apt-get -y install openjdk-8-jdk
-    echo ---------------> Checking java
-    javac -version
+    sudo apt-get -y install sbt
+    sudo apt-get install -y git
+    sudo apt-get install -y which
+    sudo apt-get install -y yum-utils
+    sudo apt-get -y install rpm-build
   displayName: 'Installing dependencies'
 
 - script: |
@@ -29,3 +33,7 @@ steps:
 - script: |
     echo Correr las pruebas de integración
   displayName: 'Integration Tests'
+
+- script: |
+    sbt rpm:packageBin
+  displayName: 'Generating RPM artifact '
