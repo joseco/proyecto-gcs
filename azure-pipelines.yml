@@ -37,5 +37,5 @@ steps:
 
 - script: |
     echo $USERWEBSERVER@$IPWEBSERVER
-    scp -i id_azure.pem /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm $USERWEBSERVER@$IPWEBSERVER:/home/$USERWEBSERVER
+    scp -i ./id_azure.pem /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm $USERWEBSERVER@$IPWEBSERVER:/home/$USERWEBSERVER
   displayName: 'Deploying'
