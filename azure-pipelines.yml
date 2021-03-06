@@ -23,6 +23,7 @@ steps:
     mkdir -p ~/.ssh
     (umask  077 ; echo $WEBSERVERSSHKEY | base64 --decode) > ~/.ssh/id_azure.pem
     chmod -R go= ~/.ssh
+
   displayName: 'Provisioning enviroment'
 
 - script: |
@@ -40,5 +41,5 @@ steps:
 
 - script: |
     echo $USERWEBSERVER@$IPWEBSERVER
-    scp -i ~/.ssh/id_azure.pem /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@157.55.199.18:/home/azureuser
+    sudo scp -v -o StrictHostKeyChecking=no -i id_azure.pem  /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@157.55.199.18:/home/azureuser
   displayName: 'Deploying'
