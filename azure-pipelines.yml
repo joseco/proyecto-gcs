@@ -11,10 +11,22 @@ pool:
 
 
 steps:
-- script: ls
-  displayName: 'Listing directory'
+- script: |
+    apt-get -y update
+    apt-get -y install java-1.8.0-openjdk-devel
+    curl https://downloads.lightbend.com/scala/2.12.10/scala-2.12.10.rpm --output scala-2.12.10.rpm
+    apt-get -y install scala-2.12.10.rpm
+    curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+    apt-get -y install sbt
+    apt-get install -y git
+    apt-get install -y which
+    apt-get install -y yum-utils
+    apt-get -y install rpm-build
+  displayName: 'Installing dependencies'
 
-- script: echo Compilar y correr las pruebas unitarias
+- script: |
+    sbt compile
+    sbt test
   displayName: 'Commit Check'
 
 - script: |
