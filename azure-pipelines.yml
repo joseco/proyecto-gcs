@@ -42,10 +42,10 @@ steps:
 - script: |
     echo $USERWEBSERVER@$IPWEBSERVER
     sudo scp -v -o StrictHostKeyChecking=no -i id_azure.pem  /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm azureuser@157.55.199.18:/home/azureuser
-    ssh -i StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl stop nginx"
-    ssh -i StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl stop gcs-app"
-    ssh -i StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo rpm -ev gcs-app-2.8.x-1.noarch"
-    ssh -i StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
-    ssh -i StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart gcs-app"
-    ssh -i StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart nginx"
+    ssh StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl stop nginx"
+    ssh StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl stop gcs-app"
+    ssh StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo rpm -ev gcs-app-2.8.x-1.noarch"
+    ssh StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
+    ssh StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart gcs-app"
+    ssh StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart nginx"
   displayName: 'Deploying'
