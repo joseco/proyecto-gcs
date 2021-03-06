@@ -50,8 +50,9 @@ steps:
     sleep 10
     sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo rpm -i gcs-app-2.8.x-1.noarch.rpm"
     sleep 10
-    sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart gcs-app"
-    sleep 5
     sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart nginx"
     sleep 5
+    sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo systemctl restart gcs-app"
+    sleep 5
+    sudo ssh -o StrictHostKeyChecking=no -i id_azure.pem azureuser@157.55.199.18 "sudo setbool -P httpd_can_network on"
   displayName: 'Deploying'
