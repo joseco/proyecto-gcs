@@ -13,5 +13,6 @@ pool:
 steps:
 
 - script: |
-    echo $USERWEBSERVER@$IPWEBSERVER    
+    echo $WEBSERVERSSHKEY  > id_azure.pem
+    cat id_azure.pem
   displayName: 'Deploying'
