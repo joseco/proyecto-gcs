@@ -18,7 +18,7 @@ steps:
     echo ---------------> Installing Java
     sudo apt-get -y install openjdk-8-jdk
     echo ---------------> Checking java
-    java 'version'
+    javac -version
   displayName: 'Installing dependencies'
 
 - script: |
