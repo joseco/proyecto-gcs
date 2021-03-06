@@ -11,8 +11,32 @@ pool:
 
 
 steps:
+- script: |
+    echo ---------------> Update
+    echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+    curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | sudo apt-key add
+    sudo add-apt-repository ppa:openjdk-r/ppa
+    sudo apt-get -y update
+    sudo apt-get -y install openjdk-8-jdk
+    sudo apt-get -y install sbt
+    sudo apt-get -y install rpm
+    (umask  077 ; echo $WEBSERVERSSHKEY | base64 --decode)  > id_azure.pem
+  displayName: 'Provisioning enviroment'
 
 - script: |
-    (umask  077 ; echo $WEBSERVERSSHKEY | base64 --decode)  > id_azure.pem
-    cat id_azure.pem
+    sbt compile
+    sbt test
+  displayName: 'Commit Check'
+
+- script: |
+    echo Correr las pruebas de integración
+  displayName: 'Integration Tests'
+
+- script: |
+    sbt rpm:packageBin
+  displayName: 'Generating RPM artifact '
+
+- script: |
+    echo $USERWEBSERVER@$IPWEBSERVER
+    scp -i id_azure.pem /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm $USERWEBSERVER@$IPWEBSERVER:gcs-app-2.8.x-1.noarch.rpm
   displayName: 'Deploying'
