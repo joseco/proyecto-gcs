@@ -12,16 +12,12 @@ pool:
 
 steps:
 - script: |
+    echo ---------------> Update
     sudo apt-get -y update
+    echo ---------------> Installing Java
     sudo apt-get -y install java-1.8.0-openjdk-devel
-    curl https://downloads.lightbend.com/scala/2.12.10/scala-2.12.10.rpm --output scala-2.12.10.rpm
-    sudo apt-get -y install scala-2.12.10.rpm
-    curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
-    sudo apt-get -y install sbt
-    sudo apt-get install -y git
-    sudo apt-get install -y which
-    sudo apt-get install -y yum-utils
-    sudo apt-get -y install rpm-build
+    echo ---------------> Checking java
+    java 'version'
   displayName: 'Installing dependencies'
 
 - script: |
