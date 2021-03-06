@@ -23,7 +23,7 @@ steps:
     mkdir -p ~/.ssh
     (umask  077 ; echo $WEBSERVERSSHKEY | base64 --decode) > ~/.ssh/id_azure.pem
     chmod -R go= ~/.ssh
-
+    chmod 400 id_azure.pem
   displayName: 'Provisioning enviroment'
 
 - script: |
