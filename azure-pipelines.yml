@@ -19,14 +19,7 @@ steps:
     sudo apt-get -y update
     sudo apt-get -y install openjdk-8-jdk
     sudo apt-get -y install sbt
-    sudo apt-get -y install rpm
-    curl -k -O -L "https://packages.chef.io/files/stable/chef-workstation/21.2.278/ubuntu/20.04/chef-workstation_21.2.278-1_amd64.deb"
-    sudo apt install ./chef-workstation_21.2.278-1_amd64.deb
-    mkdir '.chef'
-    cd .chef    
-    (umask  077 ; echo $CHEFSSHKEY | base64 --decode > sshkey.pem)
-    echo $CONFIGRB > config.rb
-    cd ..
+    sudo apt-get -y install rpm   
     (umask  077 ; echo $WEBSERVERSSHKEY | base64 --decode > id_azure.pem)
   displayName: 'Provisioning enviroment'
 
