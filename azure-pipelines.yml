@@ -24,10 +24,10 @@ steps:
     sudo apt install ./chef-workstation_21.2.278-1_amd64.deb
     mkdir '.chef'
     cd .chef    
-    (umask  077 ; echo $(ChefSSHKey) | base64 --decode > sshkey.pem)
+    (umask  077 ; echo %CHEFSSHKEY% | base64 --decode > sshkey.pem)
     echo $(ConfigRB) > config.rb
     cd ..
-    (umask  077 ; echo $(WebServerSSHKey) | base64 --decode > id_azure)
+    (umask  077 ; echo %WEBSERVERSSHKEY% | base64 --decode > id_azure)
   displayName: 'Provisioning enviroment'
 
 - script: |
@@ -44,5 +44,5 @@ steps:
   displayName: 'Generating RPM artifact '
 
 - script: |
-
+    scp -i id_azure /home/vsts/work/1/s/gcs-app/target/rpm/RPMS/noarch/gcs-app-2.8.x-1.noarch.rpm %USERWEBSERVER%@%IPWEBSERVER%:gcs-app-2.8.x-1.noarch.rpm
   displayName: 'Deploying'
